@@ -2,33 +2,42 @@ language: cpp
 git:
     depth: false
 
-dist: xenial
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - cmake
-      - ninja-build
-
 matrix:
   include:
     - name: "g++ 8"
+      os: linux
+      dist: xenial
+      python: 3.7
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
           packages:
             - g++-8
+            - cmake
+            - ninja-build
       env:
         - MATRIX_EVAL="CC=/usr/bin/gcc-8 && CXX=/usr/bin/g++-8"
+
     - name: "clang 7"
+      os: linux
+      dist: xenial
+      python: 3.7
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - cmake
+            - ninja-build
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
 
 script:
+    - pip install --user conan
     - mkdir build
     - cd build
+    - conan install ..
     - cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
     - ninja
 
