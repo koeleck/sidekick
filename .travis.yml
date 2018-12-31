@@ -28,6 +28,7 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - libstdc++-8-dev
             - cmake
             - ninja-build
       env:
@@ -38,6 +39,8 @@ before_install:
 
 script:
     - pip install --user conan
+    - conan --version
+    - sed -i 's/libstdc++/libstdc++11/' "${HOME}/.conan/profiles/default"
     - mkdir build
     - cd build
     - conan install ..
