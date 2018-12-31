@@ -51,8 +51,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR
     sidekick_check_warning("-Wlifetime")
 endif()
 
-message(STATUS "Sidekick warnings: ${SIDEKICK_WARNING_FLAGS}")
-
 function(sidekick_apply_flags TARGET)
     set_target_properties(${TARGET} PROPERTIES
         CXX_STANDARD 17
