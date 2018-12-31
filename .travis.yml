@@ -1,6 +1,6 @@
 language: cpp
 git:
-    depth: false
+  depth: false
 
 matrix:
   include:
@@ -35,15 +35,14 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
 
 before_install:
-    - eval "${MATRIX_EVAL}"
+  - eval "${MATRIX_EVAL}"
 
 script:
-    - pip install --user conan
-    - conan --version
-    - sed -i 's/libstdc++/libstdc++11/' "${HOME}/.conan/profiles/default"
-    - mkdir build
-    - cd build
-    - conan install ..
-    - cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
-    - ninja
+  - set -e
+  - pip install --user conan
+  - mkdir build && cd build
+  - conan install -s compiler.libcxx=libstdc++11 ..
+  - cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
+  - ninja
+  - set +e
 
