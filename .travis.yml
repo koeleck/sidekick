@@ -44,5 +44,6 @@ script:
   - conan install -s compiler.libcxx=libstdc++11 ..
   - cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
   - ninja
+  - ctest -j4
   - set +e
 
