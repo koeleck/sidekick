@@ -1,0 +1,7 @@
+[requires]
+Catch2/2.5.0@catchorg/stable
+
+[generators]
+cmake_find_package
+cmake_paths
+ycm
