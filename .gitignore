@@ -1,3 +1,6 @@
 *~
 *.o
+*.tmp
+*.bak
+*.swp
 build/
