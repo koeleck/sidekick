@@ -37,11 +37,11 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
   - pip install --user conan
+  - $(mkdir build && cd build && conan install -s compiler.libcxx=libstdc++11 -b never ..)
 
 script:
   - set -e
-  - mkdir build && cd build
-  - conan install -s compiler.libcxx=libstdc++11 ..
+  - mkdir -p build && cd build
   - cmake -GNinja -DCMAKE_BUILD_TYPE=Release ..
   - ninja
   - ctest -j4
