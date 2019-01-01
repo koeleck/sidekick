@@ -37,7 +37,7 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
   - pip install --user conan
-  - $(mkdir build && cd build && conan install -s compiler.libcxx=libstdc++11 -b never ..)
+  - conan install -s compiler.libcxx=libstdc++11 -b never -if build/ ./conanfile.txt
 
 script:
   - set -e
